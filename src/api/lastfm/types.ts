@@ -9,6 +9,7 @@ export interface Artist {
 
 export interface Album {
   name: string;
+  mbid: string;
   artist: string;
   url: string;
   playcount: string;
@@ -18,6 +19,7 @@ export interface Album {
 
 export interface Track {
   name: string;
+  mbid: string;
   duration: string;
   artist: string;
   url: string;

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Text } from "@chakra-ui/react";
 import type { Track, Album } from "@/api/lastfm/types";
 import { AlbumImage } from "@/components/AlbumImage/AlbumImage";
-import { Favourite } from "../Favourite/Favourite";
 import styles from "./SearchResultItem.module.css";
+import { FavouriteButtonWrapper } from "../FavouriteButtonWrapper/FavouriteButtonWrapper";
 
 interface SearchResultItemProps {
   item: Track | Album;
@@ -14,12 +14,7 @@ export const SearchResultItem: React.FC<SearchResultItemProps> = ({
   item,
   type,
 }) => {
-  const [favourited, setFavourited] = useState(false);
-
-  const toggleFavourite = () => {
-    setFavourited((prev) => !prev);
-  };
-
+  const id = item.mbid;
   return (
     <Box
       borderWidth="1px"
@@ -35,12 +30,7 @@ export const SearchResultItem: React.FC<SearchResultItemProps> = ({
           <Text fontWeight="bold">{item.name}</Text>
           <Text fontSize="sm">{(item as Track).artist}</Text>
         </div>
-        <Favourite
-          isFav={favourited}
-          onToggle={toggleFavourite}
-          ariaLabel={`Favorite ${type}`}
-          size="sm"
-        />
+        {type === "track" && <FavouriteButtonWrapper trackId={id} />}
       </div>
     </Box>
   );
