@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import styles from "./AlbumTracksList.module.css";
 import type { Track } from "@/api/lastfm/types";
-import { IconButton } from "@chakra-ui/react";
-import { Star } from "lucide-react";
+import { Favourite } from "@/components/Favourite/Favourite";
 
 interface AlbumTracksListProps {
   tracks: Track[];
@@ -47,25 +46,12 @@ export const AlbumTracksList: React.FC<AlbumTracksListProps> = ({ tracks }) => {
                   <span className={styles.duration}>—</span>
                 )}
 
-                <IconButton
-                  aria-label="Favorite track"
-                  variant={isFav ? "solid" : "outline"}
-                  colorPalette={isFav ? "yellow" : "white"}
+                <Favourite
+                  isFav={isFav}
+                  onToggle={() => toggleFavorite(trackId)}
+                  ariaLabel={`Favorite track`}
                   size="sm"
-                  onClick={() => toggleFavorite(trackId)}
-                  className={styles.favButton}
-                >
-                  <Star
-                    size={28}
-                    fill={isFav ? "#f9f06b" : "none"}
-                    stroke={isFav ? "#f9f06b" : "black"}
-                    style={{
-                      cursor: "pointer",
-                      transition: "transform 0.2s ease, fill 0.2s ease",
-                      transform: isFav ? "scale(1.1)" : "scale(1)",
-                    }}
-                  />
-                </IconButton>
+                />
               </div>
             </li>
           );

@@ -19,6 +19,7 @@ export interface Album {
 export interface Track {
   name: string;
   duration: string;
+  artist: string;
   url: string;
   "@attr": {
     rank: number;
