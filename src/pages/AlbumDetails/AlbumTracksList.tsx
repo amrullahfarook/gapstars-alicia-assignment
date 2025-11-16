@@ -1,22 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./AlbumTracksList.module.css";
 import type { Track } from "@/api/lastfm/types";
-import { Favourite } from "@/components/Favourite/Favourite";
+import { FavouriteButtonWrapper } from "@/components/FavouriteButtonWrapper/FavouriteButtonWrapper";
 
 interface AlbumTracksListProps {
   tracks: Track[];
 }
 
 export const AlbumTracksList: React.FC<AlbumTracksListProps> = ({ tracks }) => {
-  const [favorites, setFavorites] = useState<Record<string, boolean>>({});
-
-  const toggleFavorite = (trackName: string) => {
-    setFavorites((prev) => ({
-      ...prev,
-      [trackName]: !prev[trackName],
-    }));
-  };
-
   if (!tracks || tracks.length === 0) {
     return <p className={styles.empty}>No tracks available for this album.</p>;
   }
@@ -27,8 +18,7 @@ export const AlbumTracksList: React.FC<AlbumTracksListProps> = ({ tracks }) => {
 
       <ul className={styles.list}>
         {tracks.map((track, index) => {
-          const trackId = `${track.name}-${index}`;
-          const isFav = favorites[trackId];
+          const trackId = track.mbid;
 
           return (
             <li key={trackId} className={styles.item}>
@@ -46,12 +36,7 @@ export const AlbumTracksList: React.FC<AlbumTracksListProps> = ({ tracks }) => {
                   <span className={styles.duration}>—</span>
                 )}
 
-                <Favourite
-                  isFav={isFav}
-                  onToggle={() => toggleFavorite(trackId)}
-                  ariaLabel={`Favorite track`}
-                  size="sm"
-                />
+                <FavouriteButtonWrapper trackId={trackId} />
               </div>
             </li>
           );
