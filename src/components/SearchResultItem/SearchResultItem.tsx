@@ -14,7 +14,9 @@ export const SearchResultItem: React.FC<SearchResultItemProps> = ({
   item,
   type,
 }) => {
-  const id = item.mbid;
+  const id = type === "track" ? `${item.artist}_${item.name}` : item.name;
+
+  console.log(id);
   return (
     <Box
       borderWidth="1px"
@@ -28,7 +30,7 @@ export const SearchResultItem: React.FC<SearchResultItemProps> = ({
       <div className={styles.infoRow}>
         <div className={styles.text}>
           <Text fontWeight="bold">{item.name}</Text>
-          <Text fontSize="sm">{(item as Track).artist}</Text>
+          <Text fontSize="sm">{(item as Album).artist}</Text>
         </div>
         {type === "track" && <FavouriteButtonWrapper trackId={id} />}
       </div>
