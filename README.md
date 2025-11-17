@@ -1,73 +1,92 @@
-# React + TypeScript + Vite
+# Artist Showcase React App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + TypeScript app to explore artists, albums, and tracks using the Last.fm API. Users can search for songs and albums, view album details, and favourite tracks globally with persistence.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Search songs and albums by artist
+- View top albums of an artist with sorting
+- Album details with track lists, play counts, and cover art
+- Favourite tracks across the app with persistent storage
+- Responsive and clean UI with Chakra UI
+- Global state management using Zustand
+- API fetching and caching with React Query
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Setup
 
-## Expanding the ESLint configuration
+### Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Node.js v18+
+- npm
+- Last.fm API key (register at [Last.fm API](https://www.last.fm/api))
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Installation
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+    git clone https://github.com/amrullahfarook/gapstars-alicia-assignment.git
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+    cd gapstars-alicia-assignment
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+    npm install
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+    npm run dev
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Environment Variables
+
+Create a .env file in the root:
+
+    VITE_LASTFM_API_KEY=<your_lastfm_api_key>
+
+### Pages & Routes
+
+Home / Search Page
+
+    Route: /
+
+    Purpose: Search for tracks and albums
+
+    Features:
+
+        Search by query
+
+        Displays tracks and albums in grouped sections
+
+        Favourite tracks
+
+Artist Album Overview Page
+
+    Route: /album-overview/:artistName
+
+    Purpose: Show all albums of an artist
+
+    Parameters:
+
+        artistName — name of the artist
+
+    Features:
+
+        Album cover, album name, artist
+
+        Sorting by name
+
+Album Details Page
+
+    Route: /album/:artistName/:albumName
+
+    Purpose: Detailed album view
+
+    Parameters:
+        - artistName — name of the artist
+        - albumName — album title
+
+    Features:
+        - Album cover, title, total play count
+        - List of tracks with favourite buttons
+        - Persistent favourites via Zustand
+
+### Notes
+
+- API requests rely on a valid Last.fm API key
+- Chakra UI + CSS Modules for styling
+- React Query manages caching, loading, and errors
