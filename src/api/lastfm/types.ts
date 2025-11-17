@@ -21,7 +21,11 @@ export interface Track {
   name: string;
   mbid: string;
   duration: string;
-  artist: string;
+  artist: {
+    name: string;
+    url: string;
+    mbid: string;
+  };
   url: string;
   "@attr": {
     rank: number;

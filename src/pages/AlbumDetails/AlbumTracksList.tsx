@@ -18,7 +18,7 @@ export const AlbumTracksList: React.FC<AlbumTracksListProps> = ({ tracks }) => {
 
       <ul className={styles.list}>
         {tracks.map((track, index) => {
-          const trackId = track.mbid;
+          const trackId = `${track.artist.name}_${track.name}`;
 
           return (
             <li key={trackId} className={styles.item}>
